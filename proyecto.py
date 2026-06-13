@@ -6,20 +6,45 @@ import codecs
 #Decidimos usar diccionarios para almacenar la información de cada casa.
 #Cada uno de los diccionarios estará almacenada en una lista.
 
-lista_alquileres = []
+
+def crear_diccionario (linea1):
+        x=0
+        #Diccionario base
+        diccionario_alquileres = {"id":" ","name":" ","host_id": " ","host_profile_id":" ","host_name": " ","neighbourhood_group": " ","neighbourhood":" ","latitude":" ","longitude":" ","room_type":" ","price":" ","minimum_nights":" ","number_of_reviews":" ","last_review":" ","reviews_per_month":" ","calculate_host_listing":" ","availability_365":" ","number_of_reviews":" ","license":" "} 
+        claves = list(diccionario_alquileres.keys()) #Claves del diccionario en una lista
+        while claves[x] != "license":
+         diccionario_alquileres[claves[x]]=linea1[x]
+         x=x+1
+        else:
+         diccionario_alquileres[claves[x]]=linea1[x]
+         x=0
+        return diccionario_alquileres
+
 
 #Lectura del csv 
-archivo1 = open ("Listing-prueba.csv")
-for linea in archivo1:
-       linea=linea.strip("\n")
-       lista_alquileres.append(tuple(linea.split(",")))
+def Lectura_Archivo (): 
+ lista_alquileres = []
+ i=0
+ archivo1 = open ("Listing-prueba.csv")
+ for linea in archivo1:
+         linea=linea.strip("\n")
+         linea=linea.split(",")
+         if i>=1:
+                 lista_alquileres.append(crear_diccionario(linea))
+         if i==0:
+                 lista_alquileres.append(linea)
+                 i=i+1
+ archivo1.close() #CIERRE 
+ return lista_alquileres
+      
        
+def main ():
+         lista=Lectura_Archivo()
+         print(lista)
+
+main()
 
 
-archivo1.close() #CIERRE 
-
-print(lista_alquileres[0])
-print(lista_alquileres[1])
 
 
 
