@@ -3,11 +3,24 @@ import numpy as np
 import streamlit as st
 import codecs
 
-#Decidimos usar diccionarios para almacenar la información de cada casa.
-#Cada uno de los diccionarios estará almacenada en una lista.
-
-
 def crear_diccionario (linea1):
+        '''
+        Representamos datos CSV, previamente almacenados en una lista, en un diccionario.
+        Cada dato corresponde a cada categoría del archivo CSV.
+        Clave: Categoría 
+        Valor: Dato correspondiente
+        PREGUNTA: Poner cada categoría, aunque algunas no se usen?
+
+        linea1: Lista
+        crear_diccionario: Lista -> Diccionario
+
+        El parametro linea1 representa una lista, cuyos elementos serán almacenados
+        en un diccionario.
+
+        Ejemplos:
+        crear_diccionario   
+        PREGUNTA: Es necesario poner ejemplos de esto? Es posible probar esta funcion?
+        '''
         x=0
         #Diccionario base
         diccionario_alquileres = {"id":" ","name":" ","host_id": " ","host_profile_id":" ","host_name": " ","neighbourhood_group": " ","neighbourhood":" ","latitude":" ","longitude":" ","room_type":" ","price":" ","minimum_nights":" ","number_of_reviews":" ","last_review":" ","reviews_per_month":" ","calculate_host_listing":" ","availability_365":" ","number_of_reviews":" ","license":" "} 
@@ -16,13 +29,22 @@ def crear_diccionario (linea1):
          diccionario_alquileres[claves[x]]=linea1[x]
          x=x+1
         else:
-         diccionario_alquileres[claves[x]]=linea1[x]
+         diccionario_alquileres[claves[x]]=linea1[x] #Es necesario guardar la primer linea?
          x=0
         return diccionario_alquileres
 
 
 #Lectura del csv 
 def Lectura_Archivo (): 
+        '''
+        Representamos un archivo CSV, con una lista de diccionarios.
+        Cada diccionario representa la información de un alquiler,
+        es decir, de una línea del archivo CSV.
+        Cada columna del archivo está representada en una clave del diccionario.
+
+        Lectura_Archivo: None -> Lista
+        
+        '''
  lista_alquileres = []
  i=0
  archivo1 = open ("Listing-prueba.csv")
@@ -43,21 +65,6 @@ def main ():
          print(lista)
 
 main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #Pregunta Estática: Mostrar los 5 barrios con más alquileres
