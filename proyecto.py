@@ -4,34 +4,32 @@ import streamlit as st
 import codecs
 
 def crear_diccionario (linea1):
-        '''
-        Representamos datos CSV, previamente almacenados en una lista, en un diccionario.
-        Cada dato corresponde a cada categoría del archivo CSV.
-        Clave: Categoría 
-        Valor: Dato correspondiente
-        PREGUNTA: Poner cada categoría, aunque algunas no se usen?
+ '''
+ Representamos datos CSV, previamente almacenados en una lista, en un diccionario.
+ Cada dato corresponde a cada categoría del archivo CSV.
+ Clave: Categoría 
+ Valor: Dato correspondiente
+ PREGUNTA: Poner cada categoría, aunque algunas no se usen?
+ linea1: Lista
+ crear_diccionario: Lista -> Diccionario
+ El parametro linea1 representa una lista, cuyos elementos serán almacenados
+ en un diccionario.
 
-        linea1: Lista
-        crear_diccionario: Lista -> Diccionario
-
-        El parametro linea1 representa una lista, cuyos elementos serán almacenados
-        en un diccionario.
-
-        Ejemplos:
-        crear_diccionario   
-        PREGUNTA: Es necesario poner ejemplos de esto? Es posible probar esta funcion?
-        '''
+ Ejemplos:
+ crear_diccionario   
+ PREGUNTA: Es necesario poner ejemplos de esto? Es posible probar esta funcion?
+ '''
+ x=0
+ #Diccionario base
+ diccionario_alquileres = {"id":" ","name":" ","host_id": " ","host_profile_id":" ","host_name": " ","neighbourhood_group": " ","neighbourhood":" ","latitude":" ","longitude":" ","room_type":" ","price":" ","minimum_nights":" ","number_of_reviews":" ","last_review":" ","reviews_per_month":" ","calculate_host_listing":" ","availability_365":" ","number_of_reviews":" ","license":" "} 
+ claves = list(diccionario_alquileres.keys()) #Claves del diccionario en una lista
+ while claves[x] != "license":
+        diccionario_alquileres[claves[x]]=linea1[x]
+        x=x+1
+ else:
+        diccionario_alquileres[claves[x]]=linea1[x] #Es necesario guardar la primer linea?
         x=0
-        #Diccionario base
-        diccionario_alquileres = {"id":" ","name":" ","host_id": " ","host_profile_id":" ","host_name": " ","neighbourhood_group": " ","neighbourhood":" ","latitude":" ","longitude":" ","room_type":" ","price":" ","minimum_nights":" ","number_of_reviews":" ","last_review":" ","reviews_per_month":" ","calculate_host_listing":" ","availability_365":" ","number_of_reviews":" ","license":" "} 
-        claves = list(diccionario_alquileres.keys()) #Claves del diccionario en una lista
-        while claves[x] != "license":
-         diccionario_alquileres[claves[x]]=linea1[x]
-         x=x+1
-        else:
-         diccionario_alquileres[claves[x]]=linea1[x] #Es necesario guardar la primer linea?
-         x=0
-        return diccionario_alquileres
+ return diccionario_alquileres
 
 
 #Lectura del csv 
