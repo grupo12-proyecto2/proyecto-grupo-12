@@ -83,9 +83,9 @@ def buscar_max(barrios):
 def main ():
          lista=Lectura_Archivo()
          barrios=buscador_barrio(lista)
-         max_barrios= barrio_max(barrios)
+        # max_barrios= barrio_max(barrios)
 
-         print(max_barrios)
+         print()
 
 main()
 
