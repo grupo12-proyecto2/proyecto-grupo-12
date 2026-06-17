@@ -1,1 +1,0 @@
-# proyecto-grupo-12

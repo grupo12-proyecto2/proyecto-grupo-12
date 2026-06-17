@@ -105,13 +105,21 @@ def grafico_barras (data):
  ax.set_title('Los 5 barrios con más alquileres')
  return fig
 
-       
+def menu (barrios):
+   options=st.multiselect("Seleccione los barrios",barrios.keys(),accept_new_options=True)
+   st.write("Seleccionaste:",options)
+   return options 
+
+
+
+
 def main ():
          lista=Lectura_Archivo()
          barrios=buscador_barrio(lista)
          barrios_mayores= buscar_max(barrios) 
          #Pregunta Estática: Mostrar los 5 barrios con más alquileres
          st.pyplot(grafico_barras(barrios_mayores))
+         menu(barrios)
 
 main()
 
