@@ -64,49 +64,40 @@ def buscador_barrio (alquiler):
               diccionario[linea["neighbourhood"]]=diccionario.get(linea["neighbourhood"],0)+1
        return diccionario       
 
-def buscar_max(barrios):
+def buscar_max(barrios,dicc_max={}):
        max=0
-       lista_max={}
-       for x in list(barrios.keys()):
+       claves = list(barrios.keys())
+       for x in claves:
               if barrios[x] > max:
                      max= barrios[x]
                      barrio_max= x
-       lista_max[barrio_max]=max
-       if len (lista_max)<5:
-              #hola=del barrios[barrio_max]
-              print (barrio_max)
-              return buscar_max (barrios)
+       dicc_max[barrio_max]=max
+       if len(dicc_max)<5:
+              del barrios[barrio_max]
+              return buscar_max (barrios,dicc_max)
        else:
-              return lista_max
+              return dicc_max
+
+
+def grafico_barras (data):
+ fig, ax = plt.subplots()
+
+ ax.barh(data.keys(), data.values(), align='center')
+ ax.yaxis.set_inverted(True)  # arrange data from top to bottom
+ ax.set_xlabel('Cantidad de alquileres')
+ ax.set_title('Los 5 barrios con más alquileres')
+ return fig
 
        
 def main ():
          lista=Lectura_Archivo()
          barrios=buscador_barrio(lista)
-        # max_barrios= barrio_max(barrios)
-
-         print()
+         barrios_mayores= buscar_max(barrios) 
+         #Pregunta Estática: Mostrar los 5 barrios con más alquileres
+         st.pyplot(grafico_barras(barrios_mayores))
 
 main()
 
 
-#Pregunta Estática: Mostrar los 5 barrios con más alquileres
 
-#Grafico de barras
-plt.style.use('_mpl-gallery')
 
-# make data:
-x = 0.5 + np.arange(8)
-y = [4.8, 5.5, 3.5, 4.6, 6.5, 6.6, 2.6, 3.0]
-
-# plot
-fig, ax = plt.subplots()
-
-ax.bar(x, y, width=1, edgecolor="white", linewidth=0.7)
-
-ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-       ylim=(0, 8), yticks=np.arange(1, 8))
-
-plt.show()
-
-st.pyplot(fig)
