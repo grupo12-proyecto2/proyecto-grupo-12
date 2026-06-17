@@ -117,6 +117,20 @@ def filtrar_barrios(lista,opciones):
          if linea ["neighbourhood"]==opciones:
                 lista_filtrada.append(linea) 
     return lista_filtrada 
+
+def buscar_ubicacion(lista):
+   diccionario={}
+   lista_ubicaciones=[]
+   i=0
+   while len(lista)>i:
+         for linea in lista: 
+                 diccionario["latitud"]=linea["latitude"]
+                 diccionario["longitud"]=linea["longitude"]
+         lista_ubicaciones.append(diccionario)
+         i=i+1 
+
+   
+
             
 
 def main ():
