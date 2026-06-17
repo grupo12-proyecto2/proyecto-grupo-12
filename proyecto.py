@@ -72,8 +72,9 @@ def buscar_max(barrios,dicc_max={}):
                      barrio_max= x
        dicc_max[barrio_max]=max
        if len(dicc_max)<5:
-              del barrios[barrio_max]
-              return buscar_max (barrios,dicc_max)
+              copia=barrios.copy()
+              del copia[barrio_max]
+              return buscar_max (copia,dicc_max)
        else:
               return dicc_max
 
@@ -106,12 +107,17 @@ def grafico_barras (data):
  return fig
 
 def menu (barrios):
-   options=st.multiselect("Seleccione los barrios",barrios.keys(),accept_new_options=True)
+   options=st.menu_button("Seleccione un barrio",barrios.keys())
    st.write("Seleccionaste:",options)
    return options 
 
-
-
+def filtrar_barrios(lista,opciones):
+    lista_filtrada=[]
+    for linea in lista:
+         if linea ["neighbourhood"]==opciones:
+                lista_filtrada.append(linea) 
+    return lista_filtrada 
+            
 
 def main ():
          lista=Lectura_Archivo()
@@ -119,7 +125,10 @@ def main ():
          barrios_mayores= buscar_max(barrios) 
          #Pregunta Estática: Mostrar los 5 barrios con más alquileres
          st.pyplot(grafico_barras(barrios_mayores))
-         menu(barrios)
+         opciones=menu(barrios)
+         st.write(filtrar_barrios(lista,opciones))
+
+         
 
 main()
 
