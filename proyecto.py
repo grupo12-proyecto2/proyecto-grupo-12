@@ -36,15 +36,15 @@ def crear_diccionario (linea1):
 
 #Lectura del csv 
 def Lectura_Archivo (): 
-        '''
-        Representamos un archivo CSV, con una lista de diccionarios.
-        Cada diccionario representa la información de un alquiler,
-        es decir, de una línea del archivo CSV.
-        Cada columna del archivo está representada en una clave del diccionario.
+ '''
+ Representamos un archivo CSV, con una lista de diccionarios.
+ Cada diccionario representa la información de un alquiler,
+ es decir, de una línea del archivo CSV.
+ Cada columna del archivo está representada en una clave del diccionario.
 
-        Lectura_Archivo: None -> Lista
+ lectura_Archivo: None -> Lista
         
-        '''
+ '''
  lista_alquileres = []
  i=0
  archivo1 = open ("Listing-prueba.csv")
@@ -53,16 +53,39 @@ def Lectura_Archivo ():
          linea=linea.split(",")
          if i>=1:
                  lista_alquileres.append(crear_diccionario(linea))
-         if i==0:
-                 lista_alquileres.append(linea)
+         if i==0:                 
                  i=i+1
  archivo1.close() #CIERRE 
  return lista_alquileres
-      
+
+def buscador_barrio (alquiler):
+       diccionario={}
+       for linea in alquiler:
+              diccionario[linea["neighbourhood"]]=diccionario.get(linea["neighbourhood"],0)+1
+       return diccionario       
+
+def buscar_max(barrios):
+       max=0
+       lista_max={}
+       for x in list(barrios.keys()):
+              if barrios[x] > max:
+                     max= barrios[x]
+                     barrio_max= x
+       lista_max[barrio_max]=max
+       if len (lista_max)<5:
+              #hola=del barrios[barrio_max]
+              print (barrio_max)
+              return buscar_max (barrios)
+       else:
+              return lista_max
+
        
 def main ():
          lista=Lectura_Archivo()
-         print(lista)
+         barrios=buscador_barrio(lista)
+         max_barrios= barrio_max(barrios)
+
+         print(max_barrios)
 
 main()
 
