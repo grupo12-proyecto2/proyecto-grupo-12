@@ -56,12 +56,13 @@ def Lectura_Archivo ():
  archivo1.close() #CIERRE 
  return lista_alquileres
 
+
 def buscador_barrio (alquiler):
        diccionario={}
        for linea in alquiler:
               diccionario[linea["neighbourhood"]]=diccionario.get(linea["neighbourhood"],0)+1
        return diccionario       
-
+#version con recursion
 def buscar_max(barrios,dicc_max={}):
        max=0
        claves = list(barrios.keys())
@@ -76,7 +77,25 @@ def buscar_max(barrios,dicc_max={}):
        else:
               return dicc_max
 
+#version con dos ciclos
+def barrios5 (barrios):
+    lista_5 = {}
 
+    while len(lista_5) < 5:
+        maximo = 0
+        barrio_max = ""
+
+        for barrio in barrios:
+            if barrios[barrio] > maximo:
+                maximo = barrios[barrio]
+                barrio_max = barrio
+
+        lista_5[barrio_max] = maximo
+        del barrios[barrio_max]
+
+    return lista_5
+
+    
 def grafico_barras (data):
  fig, ax = plt.subplots()
 
