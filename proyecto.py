@@ -137,6 +137,16 @@ def barrios5 (barrios):
 
     
 def grafico_barras (data):
+ '''
+ Representamos un diccionario con los 5 barrios con más alquileres, y las cantidades de alquileres
+ mediante un gráfico de barras.
+ data: Diccionario
+
+ grafico_barras: Diccionario -> Gráfico de barras
+ El parámetro es un diccionario con barrios, y la cantidad de alquileres en cada uno.
+ Devuelve un gráfico de barras, donde en X se muestran los barrios y en Y n de alquileres.
+
+ '''      
  fig, ax = plt.subplots()
 
  ax.barh(data.keys(), data.values(), align='center')
@@ -146,11 +156,32 @@ def grafico_barras (data):
  return fig
 
 def menu (barrios):
+   '''
+   Representamos una lista de barrios, mediante un menú desplegable.
+   Se debe seleccionar un solo barrio.
+   options: String
+
+   menu: Diccionario -> String
+   El parámetro es un diccionario cuyas claves son los barrios.
+   Devuelve el barrio seleccionado por el usuario.
+      
+   '''    
    options=st.menu_button("Seleccione un barrio",barrios.keys())
    st.write("Seleccionaste:",options)
    return options 
 
 def filtrar_barrios(lista,opciones):
+    '''
+    Representamos una lista de alquileres (filtrada por el barrio que selecciono el usuario), mediante una lista.
+    lista: Lista
+    opciones: String
+
+    filtrar_barrios: Lista String -> Lista
+    El parámetro lista corresponde a la lista de alquileres general.
+    El parámetro String corresponde al barrio seleccionado por el usuario.
+    Devuelve la lista de alquileres cuyo barrio coincide
+    con el seleccionado por el usuario.
+    '''   
     lista_filtrada=[]
     for linea in lista:
          if linea ["neighbourhood"]==opciones:
@@ -158,6 +189,14 @@ def filtrar_barrios(lista,opciones):
     return lista_filtrada 
 
 def sacar_punto (num):
+       '''
+       Dado un numero representado como string, busca el segundo punto en la cadena
+       y lo elimina.
+       Ejemplos:
+       sacar_punto("12.345.678")-->"12.345678
+       sacar_punto("1.234.567.890")-->1.234567.890
+       sacar_punto: num(str)--->str 
+       '''
        punto1= num.find(".")
        punto2= num.find(".",punto1+1)
        num_nuevo=num[:punto2] + num[punto2+1:]
@@ -165,6 +204,18 @@ def sacar_punto (num):
 
 
 def buscar_ubicacion(lista):
+   '''
+   Recorre cada elemento de la lista,elimina el segundo punto de 
+   los valores de latitud y longitud mediante la funcion sacar_punto
+   los convierte a float y los almacena en las listas separadas
+   Ejemplo:
+   datos=[
+   ...{"latitude": "12.345.678","longitude: "98.765.432"},
+   "latitude": "11.222.333","longitude: "44.555.666"}...]-->
+   {'lat':[12.345678,98.765432]
+    'lon':[11.222333,44.555666]}
+   lista(list-diccionarios)--->dict
+   '''    
    diccionario={}
    longitud=[]
    latitud=[]
@@ -191,6 +242,7 @@ def main ():
          alquileres_filtrados=filtrar_barrios(lista,opciones)
          if opciones != None:
                ubicacion= buscar_ubicacion(alquileres_filtrados)
+               #Pregunta Dinámica: Mostrar en el mapa los alquileres de X barrio
                st.map(ubicacion,size=20, color="#0044ff")
                st.write(ubicacion)
          
