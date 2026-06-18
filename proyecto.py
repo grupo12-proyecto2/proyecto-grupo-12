@@ -101,7 +101,7 @@ def grafico_barras (data):
  fig, ax = plt.subplots()
 
  ax.barh(data.keys(), data.values(), align='center')
- ax.yaxis.set_inverted(True)  # arrange data from top to bottom
+ ax.yaxis.set_inverted(True)  
  ax.set_xlabel('Cantidad de alquileres')
  ax.set_title('Los 5 barrios con más alquileres')
  return fig
@@ -118,17 +118,25 @@ def filtrar_barrios(lista,opciones):
                 lista_filtrada.append(linea) 
     return lista_filtrada 
 
+def sacar_punto (num):
+       punto1= num.find(".")
+       punto2= num.find(".",punto1+1)
+       num_nuevo=num[:punto2] + num[punto2+1:]
+       return num_nuevo
+
+
 def buscar_ubicacion(lista):
    diccionario={}
-   lista_ubicaciones=[]
-   i=0
-   while len(lista)>i:
-         for linea in lista: 
-                 diccionario["latitud"]=linea["latitude"]
-                 diccionario["longitud"]=linea["longitude"]
-         lista_ubicaciones.append(diccionario)
-         i=i+1 
-
+   longitud=[]
+   latitud=[]
+   for linea in lista: 
+        print (linea)
+        latitud.append(float(sacar_punto(linea["latitude"])))
+        longitud.append(float(sacar_punto(linea["longitude"])))
+   diccionario["lat"]=latitud 
+   diccionario["lon"]=longitud
+   
+   return diccionario 
    
 
             
@@ -141,9 +149,12 @@ def main ():
          st.pyplot(grafico_barras(barrios_mayores))
          opciones=menu(barrios)
          st.write(filtrar_barrios(lista,opciones))
-
+         alquileres_filtrados=filtrar_barrios(lista,opciones)
+         if opciones != None:
+               ubicacion= buscar_ubicacion(alquileres_filtrados)
+               st.map(ubicacion,size=20, color="#0044ff")
+               st.write(ubicacion)
          
-
 main()
 
 
