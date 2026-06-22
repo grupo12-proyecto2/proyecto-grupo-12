@@ -159,19 +159,6 @@ def filtrar_barrios(lista,opciones):
                 lista_filtrada.append(linea) 
     return lista_filtrada 
 
-def sacar_punto (num):
-       '''
-       Dado un numero representado como string, busca el segundo punto en la cadena
-       y lo elimina.
-       Ejemplos:
-       sacar_punto("12.345.678")-->"12.345678
-       sacar_punto("1.234.567.890")-->1.234567.890
-       sacar_punto: num(str)--->str 
-       '''
-       punto1= num.find(".")
-       punto2= num.find(".",punto1+1)
-       num_nuevo=num[:punto2] + num[punto2+1:]
-       return num_nuevo
 
 
 def buscar_ubicacion(lista):
@@ -192,8 +179,8 @@ def buscar_ubicacion(lista):
    latitud=[]
    for linea in lista: 
         print (linea)
-        latitud.append(float(sacar_punto(linea["latitude"])))
-        longitud.append(float(sacar_punto(linea["longitude"])))
+        latitud.append(float(linea["latitude"]))
+        longitud.append(float(linea["longitude"]))
    diccionario["lat"]=latitud 
    diccionario["lon"]=longitud
    
