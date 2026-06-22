@@ -78,35 +78,6 @@ def buscador_barrio (alquiler):
               diccionario[linea["neighbourhood"]]=diccionario.get(linea["neighbourhood"],0)+1
        return diccionario   
 
-#version con recursion
-
-def buscar_max(barrios,dicc_max={}):
-       ''' 
-       Repreentamos con un diccionario la cantidad de hospedajes por barrio
-       buscar_max: dict,dict ->dict
-       barrios:dict
-       dicc_max:dict     
-       El parametro barrios representa un diccionario.
-       La clave es el nombre del barrio y el valor la cantidad de hospedajes.
-
-       El parametro dicc_max representa un diccionario que va almacenando los barrios con el maximo
-       numero de hospedajes.
-
-       La funcion retorna a un diccionario con los 5 barrios con mayor hospedajes.
-       '''
-       max=0
-       claves = list(barrios.keys())
-       for x in claves:
-              if barrios[x] > max:
-                     max= barrios[x]
-                     barrio_max= x
-       dicc_max[barrio_max]=max
-       if len(dicc_max)<5:
-              copia=barrios.copy()
-              del copia[barrio_max]
-              return buscar_max (copia,dicc_max)
-       else:
-              return dicc_max
 
 #version con dos ciclos
 def barrios5 (barrios):
@@ -234,7 +205,7 @@ def buscar_ubicacion(lista):
 def main ():
          lista=Lectura_Archivo()
          barrios=buscador_barrio(lista)
-         barrios_mayores= buscar_max(barrios) 
+         barrios_mayores= barrios5(barrios) 
          #Pregunta Estática: Mostrar los 5 barrios con más alquileres
          st.pyplot(grafico_barras(barrios_mayores))
          opciones=menu(barrios)
