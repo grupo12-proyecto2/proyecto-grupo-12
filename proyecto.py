@@ -91,18 +91,20 @@ def barrios5 (barrios):
     ejemplo: 
     ''' 
     lista_5 = {}
+    copia = barrios.copy()
 
     while len(lista_5) < 5:
         maximo = 0
         barrio_max = ""
 
-        for barrio in barrios:
+        for barrio in copia:
             if barrios[barrio] > maximo:
                 maximo = barrios[barrio]
                 barrio_max = barrio
 
         lista_5[barrio_max] = maximo
-        del barrios[barrio_max]
+        
+        del copia[barrio_max]
 
     return lista_5
 
