@@ -1,6 +1,6 @@
 import codecs
 
-def crear_diccionario (linea1):
+def crear_diccionario (linea1,flag=0):
  '''
  Representamos datos CSV, previamente almacenados en una lista, en un diccionario.
  Cada dato corresponde a cada categoría del archivo CSV.
@@ -18,14 +18,16 @@ def crear_diccionario (linea1):
  '''
  x=0
  #Diccionario base
- diccionario_alquileres = {"id":" ","name":" ","host_id": " ","host_profile_id":" ","host_name": " ","neighbourhood_group": " ","neighbourhood":" ","latitude":" ","longitude":" ","room_type":" ","price":" ","minimum_nights":" ","number_of_reviews":" ","last_review":" ","reviews_per_month":" ","calculate_host_listing":" ","availability_365":" ","number_of_reviews":" ","license":" "} 
- claves = list(diccionario_alquileres.keys()) #Claves del diccionario en una lista
- while claves[x] != "license":
-        diccionario_alquileres[claves[x]]=linea1[x]
-        x=x+1
- else:
-        diccionario_alquileres[claves[x]]=linea1[x] #Es necesario guardar la primer linea?
-        x=0
+ diccionario_alquileres = {} 
+ 
+ while  x <= len(linea1):
+        if flag == 0:
+                diccionario_alquileres[linea1[x]]=" "
+                x=x+1
+        else:
+                claves=list(diccionario_alquileres.keys())
+                diccionario_alquileres[claves[x]]=linea1[x] #Es necesario guardar la primer linea?
+                x=x+1
  return diccionario_alquileres
 
  
@@ -47,8 +49,9 @@ def Lectura_Archivo ():
          linea=linea.strip("\n")
          linea=linea.split(",")
          if i>=1:
-                 lista_alquileres.append(crear_diccionario(linea))
-         if i==0:                 
+                 lista_alquileres.append(crear_diccionario(linea,1))
+         if i==0:
+                 crear_diccionario(linea,0)                 
                  i=i+1
  archivo1.close() #CIERRE 
  return lista_alquileres
