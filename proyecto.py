@@ -2,15 +2,13 @@
 import numpy as np
 import streamlit as st
 
-
-   
-
-            
-
 def main ():
          #Lectura del archivo: 
          from lectura import Lectura_Archivo
-         lista=Lectura_Archivo()
+         #lista=Lectura_Archivo()
+         from probar import lectura
+         lista=lectura() #VERSION ALTERNATIVA (PREGUNTAR AL PROFE)
+         
          #Pregunta Estática: Mostrar los 5 barrios con más alquileres
          from Estatica1 import buscador_barrio,barrios5,grafico_barras
          barrios=buscador_barrio(lista)
@@ -26,6 +24,7 @@ def main ():
                #Pregunta Dinámica: Mostrar en el mapa los alquileres de X barrio
                st.map(ubicacion,size=20, color="#0044ff")
                st.write(ubicacion)
+               
          
 main()
 

@@ -72,4 +72,3 @@ def Lectura_Archivo ():
                  lista_alquileres.append(crear_diccionario(linea,campos))
  archivo1.close() #CIERRE 
  return lista_alquileres
-
