@@ -24,9 +24,15 @@ def main ():
                #Pregunta Dinámica: Mostrar en el mapa los alquileres de X barrio
                st.map(ubicacion,size=20, color="#0044ff")
                st.write(ubicacion)
-               
+         from Slider import slider     
+         dias=slider()
+         from Slider import filtrar_dias 
+         st.write(filtrar_dias(lista,dias))  
+
          
 main()
+
+
 
 
 
