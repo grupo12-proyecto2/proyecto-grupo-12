@@ -11,7 +11,8 @@ def menu (barrios:dict[str,int]):
    Devuelve el barrio seleccionado por el usuario.
       
    '''    
-   options=st.menu_button("Seleccione un barrio",barrios.keys())
+   options=st.selectbox("Seleccione un barrio",barrios.keys())
+   st.write("Seleccionaste:",options)
    return options 
 
 def filtrar_barrios(lista,opciones):
