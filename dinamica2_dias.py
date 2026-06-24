@@ -15,7 +15,8 @@ def filtrar_dias(lista,dias):
      
 
 def mostrar_tabla(lista_filtrada):
-     st.dataframe(lista_filtrada)
+     tabla=st.dataframe(lista_filtrada)
+     return tabla
           
 
     
