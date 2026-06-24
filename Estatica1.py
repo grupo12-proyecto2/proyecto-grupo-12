@@ -39,7 +39,6 @@ def barrios5 (barrios):
 
     while len(lista_5) < 5:
         maximo = 0
-        barrio_max = ""
 
         for barrio in copia:
             if barrios[barrio] > maximo:
