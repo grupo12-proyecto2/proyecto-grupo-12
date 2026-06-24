@@ -1,35 +1,44 @@
-
+#LIBRERIAS
 import numpy as np
 import streamlit as st
+#FUNCIONES DE MODULOS
+from probar import lectura
+from Estatica1 import buscador_barrio,barrios5,grafico_barras
+from Dinamica1 import menu,filtrar_barrios,buscar_ubicacion
+from dinamica2_dias import slider,filtrar_dias,mostrar_tabla
 
+
+# ==================================================
+# MAIN
+# ==================================================
 def main ():
-         #Lectura del archivo: 
-         from lectura import Lectura_Archivo
-         #lista=Lectura_Archivo()
-         from probar import lectura
-         lista=lectura() #VERSION ALTERNATIVA (PREGUNTAR AL PROFE)
+         # ---------- LECTURA CSV ----------: 
+         lista=lectura() 
          
-         #Pregunta Estática: Mostrar los 5 barrios con más alquileres
-         from Estatica1 import buscador_barrio,barrios5,grafico_barras
+         #----------Pregunta estática: 5 barrios con más alquileres----------
          barrios=buscador_barrio(lista)
          barrios_mayores= barrios5(barrios) 
          st.pyplot(grafico_barras(barrios_mayores))
-         #Pregunta dinamica: mostrar en el mapa los alquileres
-         from Dinamica1 import menu,filtrar_barrios,buscar_ubicacion
+
+         #----------Pregunta dinámica: Mapeo de alquileres de X barrio----------
          opciones=menu(barrios)
          st.write(filtrar_barrios(lista,opciones))
          alquileres_filtrados=filtrar_barrios(lista,opciones)
          if opciones != None:
                ubicacion= buscar_ubicacion(alquileres_filtrados)
-               #Pregunta Dinámica: Mostrar en el mapa los alquileres de X barrio
                st.map(ubicacion,size=20, color="#0044ff")
                st.write(ubicacion)
-         from Slider import slider     
-         dias=slider()
-         from Slider import filtrar_dias 
-         st.write(filtrar_dias(lista,dias))  
 
-         
+         #----------Pregunta dinámica: Tabla de alquileres con X disponibilidad de días---------- 
+         rango_dias= list(range(1,366))    
+         dias=slider("Cantidad de días",rango_dias)
+         lista_dias=filtrar_dias(lista,dias) 
+         mostrar_tabla(lista_dias)
+# ==================================================
+# MAIN
+# ==================================================         
+
+
 main()
 
 

@@ -2,6 +2,7 @@ import codecs
 
 def crear_diccionario (linea:list[int|str|float],campos:list[str]):
  '''
+ RECETA:
  Representamos una linea del CSV (lista), con un diccionario.
  El diccionario queda definido por la estructura {Campo:Valor}
  Campo: String ("id","neighbourhood",etc)
