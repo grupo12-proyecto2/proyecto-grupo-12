@@ -5,7 +5,7 @@ import streamlit as st
 from lectura_csv import lectura
 from Estatica1 import buscador_barrio,barrios5,grafico_barras
 from Dinamica1 import menu,filtrar_barrios,buscar_ubicacion
-from dinamica2_dias import slider,filtrar_dias,mostrar_tabla
+from dinamica2_dias import slider,filtrar_dias
 
 
 # ==================================================
@@ -14,26 +14,39 @@ from dinamica2_dias import slider,filtrar_dias,mostrar_tabla
 def main ():
          # ---------- LECTURA CSV ----------: 
          lista=lectura() 
+
+         #---------- Formato de página ----------
+         col1, col2 = st.columns(2,gap="large")
+
          
          #----------Pregunta estática: 5 barrios con más alquileres----------
          barrios=buscador_barrio(lista)
          barrios_mayores= barrios5(barrios) 
-         st.pyplot(grafico_barras(barrios_mayores))
+         grafico= grafico_barras(barrios_mayores)
+         
+         
 
-         #----------Pregunta dinámica: Mapeo de alquileres de X barrio----------
-         opciones=menu(barrios)
-         st.write(filtrar_barrios(lista,opciones))
-         alquileres_filtrados=filtrar_barrios(lista,opciones)
-         if opciones != None:
+         #----------PREGUNTA DINAMICA: MAPEO DE ALQUILERES----------
+         col1.subheader("Mapa de alquileres por barrio")
+         opcion=col1.selectbox("Seleccione un barrio",barrios) #Despliegue de menú y guarda
+         alquileres_filtrados=filtrar_barrios(lista,opcion)
+         if opcion != None:
                ubicacion= buscar_ubicacion(alquileres_filtrados)
-               st.map(ubicacion,size=20, color="#0044ff")
-               st.write(ubicacion)
+               col1.map(ubicacion,size=20, color="#0044ff")
 
          #----------Pregunta dinámica: Tabla de alquileres con X disponibilidad de días---------- 
-         rango_dias= list(range(1,366))    
-         dias=slider("Cantidad de días",rango_dias)
-         lista_dias=filtrar_dias(lista,dias) 
-         mostrar_tabla(lista_dias)
+         rango_dias= list(range(1,366))
+         col2.subheader("Disponibilidad de alquileres según días disponibles")    
+         dias = col2.select_slider("Cantidad de días",rango_dias) 
+         lista_dias=filtrar_dias(lista,dias)
+         
+         col2.write(f"Alquileres disponibles con {dias} días disponibles")
+         col2.dataframe(lista_dias)
+         
+         
+         col1.subheader("ESTADISTICA: Los 5 barrios con mas alquileres")
+         col1.pyplot (grafico)
+
 # ==================================================
 # MAIN
 # ==================================================         

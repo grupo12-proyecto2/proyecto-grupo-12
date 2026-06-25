@@ -12,7 +12,6 @@ def menu (barrios:dict[str,int]):
       
    '''    
    options=st.selectbox("Seleccione un barrio",barrios.keys())
-   st.write("Seleccionaste:",options)
    return options 
 
 def filtrar_barrios(lista,opciones):
