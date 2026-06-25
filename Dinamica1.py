@@ -9,12 +9,22 @@ def menu (barrios:dict[str,int]):
    menu: Diccionario -> String
    El parámetro es un diccionario cuyas claves son los barrios.
    Devuelve el barrio seleccionado por el usuario.
+
+   Ejemplo:
+   barrios = {
+   {"Nob hill": 120,
+   "Noe valley": 95}
+   El usuario selecciona:
+   "Nob hill"
+   -->
+   "Nob hill"
+
       
    '''    
    options=st.selectbox("Seleccione un barrio",barrios.keys())
    return options 
 
-def filtrar_barrios(lista,opciones):
+def filtrar_barrios(lista:list[dict],opciones:str):
     '''
     Representamos una lista de alquileres (filtrada por el barrio que selecciono el usuario), mediante una lista.
     lista: Lista
@@ -25,6 +35,18 @@ def filtrar_barrios(lista,opciones):
     El parámetro String corresponde al barrio seleccionado por el usuario.
     Devuelve la lista de alquileres cuyo barrio coincide
     con el seleccionado por el usuario.
+    
+    Ejemplo:
+    lista = 
+    [{"neighbourhood": "Nob hill"},
+    {"neighbourhood": "Noe vallley"},
+    {"neighbourhood": "Nob hill"}]
+
+    opciones = "Nob hill"
+
+    -->
+    [  {"neighbourhood": "Nob hill"},
+    {"neighbourhood": "Nob hill"}]
     '''   
     lista_filtrada=[]
     for linea in lista:
@@ -34,7 +56,7 @@ def filtrar_barrios(lista,opciones):
 
 
 
-def buscar_ubicacion(lista):
+def buscar_ubicacion(lista:list[dict]):
    '''
    Recorre cada elemento de la lista,elimina el segundo punto de 
    los valores de latitud y longitud mediante la funcion sacar_punto
@@ -43,8 +65,8 @@ def buscar_ubicacion(lista):
    datos=[
    ...{"latitude": "12.345.678","longitude: "98.765.432"},
    "latitude": "11.222.333","longitude: "44.555.666"}...]-->
-   {'lat':[12.345678,98.765432]
-    'lon':[11.222333,44.555666]}
+   {'lat':[12.345678,98.765432] 
+   'lon':[11.222333,44.555666]}
    lista(list-diccionarios)--->dict
    '''    
    diccionario={}
