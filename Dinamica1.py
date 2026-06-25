@@ -1,28 +1,4 @@
 import streamlit as st
-#Pregunta 2 : Mostrar en el mapa los alquileres 
-def menu (barrios:dict[str,int]):
-   '''
-   Representamos una lista de barrios, mediante un menú desplegable.
-   Se debe seleccionar un solo barrio.
-   options: String
-
-   menu: Diccionario -> String
-   El parámetro es un diccionario cuyas claves son los barrios.
-   Devuelve el barrio seleccionado por el usuario.
-
-   Ejemplo:
-   barrios = {
-   {"Nob hill": 120,
-   "Noe valley": 95}
-   El usuario selecciona:
-   "Nob hill"
-   -->
-   "Nob hill"
-
-      
-   '''    
-   options=st.selectbox("Seleccione un barrio",barrios.keys())
-   return options 
 
 def filtrar_barrios(lista:list[dict],opciones:str):
     '''

@@ -1,9 +1,10 @@
 from lectura import crear_diccionario
 from Estatica1 import buscador_barrio
-from Dinamica1 import filtrar_barrios
-from Dinamica1 import buscar_ubicacion
-#testing
+from Dinamica1 import filtrar_barrios,buscar_ubicacion
+from dinamica2_dias import filtrar_dias
 
+#testing
+'''
 def test_crear_diccionario():
     """
     funcion de prueba de la funcion crear_diccionario
@@ -18,6 +19,7 @@ def test_crear_diccionario():
     assert dic["name"] == "Bright Modern Garden Unit - 1BR/1BTH"
     assert dic["neighbourhood"] == "Western Addition"
     assert dic["license"] == "STR-0006854"
+'''
 
 def test_buscador_barrio():
     """
@@ -50,6 +52,7 @@ def test_filtrar_barrios():
     lista = [{"neighbourhood": "Nob Hill"},{"neighbourhood": "Bayview"},{"neighbourhood": "Nob Hill"}]
 
     assert filtrar_barrios(lista, "Nob Hill") == [{"neighbourhood": "Nob Hill"},{"neighbourhood": "Nob Hill"}]
+
 #Testing buscar_ubicacion   
 def test_buscar_ubicacion():
     """
@@ -59,3 +62,11 @@ def test_buscar_ubicacion():
              {"latitude": "37.78", "longitude": "-122.43"}]
 
     assert buscar_ubicacion(lista) == {"lat": [37.77, 37.78],"lon": [-122.42, -122.43]}
+
+def test_filtrar_dias():
+     assert filtrar_dias(
+         [{"availability_365": "276", "reviews_last_year": "2", "status": ""},
+         {"availability_365": "365", "reviews_last_year": "0", "status": "pending"},
+         {"availability_365": "211", "reviews_last_year": "1", "status": ""}],300)  == [{"availability_365": "365", "reviews_last_year": "0", "status": "pending"}]
+            
+         
