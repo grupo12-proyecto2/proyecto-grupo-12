@@ -49,7 +49,6 @@ def buscar_ubicacion(lista:list[dict]):
    longitud=[]
    latitud=[]
    for linea in lista: 
-        print (linea)
         latitud.append(float(linea["latitude"]))
         longitud.append(float(linea["longitude"]))
    diccionario["lat"]=latitud 
