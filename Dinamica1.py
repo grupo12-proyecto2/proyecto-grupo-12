@@ -56,7 +56,7 @@ def filtrar_barrios(lista:list[dict],opciones:str):
 
 
 
-def buscar_ubicacion(lista:list[dict]):
+def buscar_ubicacion(lista:list[dict]): 
    '''
    Recorre cada elemento de la lista,elimina el segundo punto de 
    los valores de latitud y longitud mediante la funcion sacar_punto
