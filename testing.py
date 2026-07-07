@@ -45,28 +45,45 @@ def test_buscador_barrio():
         "Bayview":4}
 
 
+#===============================================================
+#                Testing de filtrar_barrios
+#===============================================================
 def test_filtrar_barrios():
     """
-    funcion de prueba de la funcion filtrar_barrio
+    funcion de prueba de la funcion filtrar_barrios
     """
-    lista = [{"neighbourhood": "Nob Hill"},{"neighbourhood": "Bayview"},{"neighbourhood": "Nob Hill"}]
-
-    assert filtrar_barrios(lista, "Nob Hill") == [{"neighbourhood": "Nob Hill"},{"neighbourhood": "Nob Hill"}]
-
-#Testing buscar_ubicacion   
+     assert filtrar_barrios([{"neighbourhood": "Nob hill"},{"neighbourhood": "Nob hill"}] , "Potrero hill")
+     ==[]
+     assert filtrar_barrios ({"neighbourhood": "Nob hill",{"neighbourhood": "Potrero hill"}} , "Nob hill")
+     == [{"neighbourhood": "Nob hill"}]
+     assert filtrar_barrios ([] , "Potrero hill") == []
+#===============================================================
+#               Testing de buscar_ubicacion   
+#===============================================================
 def test_buscar_ubicacion():
     """
     funcion de prueba de la funcion buscar_ubicacion
     """
-    lista = [{"latitude": "37.77", "longitude": "-122.42"},
-             {"latitude": "37.78", "longitude": "-122.43"}]
-
+    lista = [{"latitude": "37.77", "longitude": "-122.42"},{"latitude": "37.78", "longitude": "-122.43"}]
     assert buscar_ubicacion(lista) == {"lat": [37.77, 37.78],"lon": [-122.42, -122.43]}
 
+    lista2=[]
+    assert buscar_ubicacion(lista2) == {}
+    
+    lista3=[{"neighbourhood": "Nob hill"},{"neighbourhood": "Nob hill"}]
+    assert buscar_ubicacion(lista3) == {}
+
+#===============================================================
+#               Testing de filtrar_dias   
+#===============================================================
 def test_filtrar_dias():
-     assert filtrar_dias(
-         [{"availability_365": "276", "reviews_last_year": "2", "status": ""},
-         {"availability_365": "365", "reviews_last_year": "0", "status": "pending"},
-         {"availability_365": "211", "reviews_last_year": "1", "status": ""}],300)  == [{"availability_365": "365", "reviews_last_year": "0", "status": "pending"}]
-            
+    lista4= [{"availability_365": "276", "reviews_last_year": "2", "status": ""},
+    {"availability_365": "310", "reviews_last_year": "0", "status": "pending"},
+    {"availability_365": "211", "reviews_last_year": "1", "status": ""}]
+
+     assert filtrar dias (lista4,300) == [{"availability_365": "310", "reviews_last_year": "0", "status": "pending"}]
+     assert filtrar_dias (lista4,365) == []
+     assert filtrar_dias ([],20) == []
+
+
          
