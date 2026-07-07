@@ -20,17 +20,17 @@ def test_crear_diccionario():
     assert dic["neighbourhood"] == "Western Addition"
     assert dic["license"] == "STR-0006854"
 '''
-
+#========================================================
+#           testing de buscador_barrio()
+#========================================================
 def test_buscador_barrio():
-    funcion de prueba de la funcion busacador_barrio
-    assert buscador_barrio([])=={} 
-    alquiler=[{"neighbourhud":"Bernal Heights"}]
-    assert buscador_barrio(alquiler)=={"Bernal Heigths":1 }
-    alquiler1=[{"neighbourhud":"Crocker Amazon","price": 100,"room_type":"Entire home/apt"},
-            {"neighbourhud":"Downtown/Civic Center","price":85,"room_type":"Private room"},
-            {"neighbourhud":"Crocker Amazon","price":120,"room_type":"Entire home/apt"}]
-    assert buscador_barrio(alquiler1)=={"Crocker Amazon":2,"Downtown/Civic Center":1} 
-    alquileres = [
+    #funcion de prueba de la funcion busacador_barrio
+     assert buscador_barrio([])=={} 
+     assert buscador_barrio([{"neighbourhood":"Bernal Heights"}])=={"Bernal Heights":1 }
+     assert buscador_barrio([{"neighbourhood":"Crocker Amazon","price": 100,"room_type":"Entire home/apt"},
+            {"neighbourhood":"Downtown/Civic Center","price":85,"room_type":"Private room"},
+            {"neighbourhood":"Crocker Amazon","price":120,"room_type":"Entire home/apt"}])=={"Crocker Amazon":2,"Downtown/Civic Center":1} 
+     alquileres = [
         {"neighbourhood": "Western Addition"},
         {"neighbourhood": "Bernal Heights"},
         {"neighbourhood": "Haight Ashbury"},
@@ -40,9 +40,8 @@ def test_buscador_barrio():
         {"neighbourhood": "Bayview"},
         {"neighbourhood": "Bayview"},
         {"neighbourhood": "Bayview"},
-    ]
-
-    assert buscador_barrio(alquileres) == {
+     ]
+     assert buscador_barrio(alquileres) == {
         "Western Addition":2,
         "Bernal Heights":1,
         "Nob Hill": 1,
