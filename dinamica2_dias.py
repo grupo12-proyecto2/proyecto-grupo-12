@@ -28,11 +28,12 @@ def filtrar_dias(lista:list[dict],dias:int)-> list[dict]:
      filtrar_dias([], 200)
 
      ==> Devuelve 
-     []  (lista vacia)
+     [{"availability_365": "276", "reviews_last_year": "2", "status": ""},
+      {"availability_365": "310", "reviews_last_year": "0", "status": "pending"},
+      {"availability_365": "211", "reviews_last_year": "1", "status": ""}]
 
      3)
      filtrar_dias(lista,360)
-
      ==> Devuelve 
      []  (lista vacia)
      '''

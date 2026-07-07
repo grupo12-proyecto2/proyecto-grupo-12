@@ -30,7 +30,7 @@ def filtrar_barrios(lista:list[dict],opciones:str)->list:
     2)
     lista = 
     [{"neighbourhood": "Nob hill"},
-    {"neighbourhood": "Noe vallley"},
+    {"neighbourhood": "Noe valley"},
     {"neighbourhood": "Nob hill"}]
 
     opciones = "Potrero hill"
@@ -74,8 +74,8 @@ def buscar_ubicacion(lista:list[dict])->dict:
    "latitude": "11.222.333","longitude: "44.555.666"}...]
    --> Devuelve
 
-   {'lat':[12.345678,98.765432] 
-   'lon':[11.222333,44.555666]}
+   {'lat':[12.345678,11.222333] 
+   'lon':[98.765.432,44.555666]}
 
    2)
    lista= [{"neighbourhood": "Nob hill"},
@@ -83,13 +83,13 @@ def buscar_ubicacion(lista:list[dict])->dict:
    {"neighbourhood": "Nob hill"}]
 
    --> Devuelve
-   {}   (diccionario vacio)
+   {'lat': [], 'lon': []}   
     
    3)
    lista=[]
 
    --> Devuelve
-   {}  (diccionario vacio)
+   {'lat': [], 'lon': []}  
    '''    
    diccionario={}
    longitud=[]
@@ -98,8 +98,10 @@ def buscar_ubicacion(lista:list[dict])->dict:
    for linea in lista: 
 
      #obtiene la latitud y longitud y las convierte en tipo float
-     latitud.append(float(linea["latitude"]))
-     longitud.append(float(linea["longitude"]))
+     if linea.get("latitude") != None:
+       latitud.append(float(linea["latitude"]))
+     if linea.get ("longitude") != None:
+       longitud.append(float(linea["longitude"]))
 
    #guarda las latitudes y longitudes en el diccionario.
    diccionario["lat"]=latitud 

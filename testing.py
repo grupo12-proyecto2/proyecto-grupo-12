@@ -52,11 +52,9 @@ def test_filtrar_barrios():
     """
     funcion de prueba de la funcion filtrar_barrios
     """
-     assert filtrar_barrios([{"neighbourhood": "Nob hill"},{"neighbourhood": "Nob hill"}] , "Potrero hill")
-     ==[]
-     assert filtrar_barrios ({"neighbourhood": "Nob hill",{"neighbourhood": "Potrero hill"}} , "Nob hill")
-     == [{"neighbourhood": "Nob hill"}]
-     assert filtrar_barrios ([] , "Potrero hill") == []
+    assert filtrar_barrios([{"neighbourhood": "Nob hill"},{"neighbourhood": "Nob hill"}] , "Potrero hill") == []
+    assert filtrar_barrios ([{"neighbourhood": "Nob hill"},{"neighbourhood": "Potrero hill"}] , "Nob hill") == [{"neighbourhood": "Nob hill"}]
+    assert filtrar_barrios ([] , "Potrero hill") == []
 #===============================================================
 #               Testing de buscar_ubicacion   
 #===============================================================
@@ -68,10 +66,10 @@ def test_buscar_ubicacion():
     assert buscar_ubicacion(lista) == {"lat": [37.77, 37.78],"lon": [-122.42, -122.43]}
 
     lista2=[]
-    assert buscar_ubicacion(lista2) == {}
+    assert buscar_ubicacion(lista2) == {'lat': [], 'lon': []}
     
     lista3=[{"neighbourhood": "Nob hill"},{"neighbourhood": "Nob hill"}]
-    assert buscar_ubicacion(lista3) == {}
+    assert buscar_ubicacion(lista3) == {'lat': [], 'lon': []}
 
 #===============================================================
 #               Testing de filtrar_dias   
@@ -81,9 +79,11 @@ def test_filtrar_dias():
     {"availability_365": "310", "reviews_last_year": "0", "status": "pending"},
     {"availability_365": "211", "reviews_last_year": "1", "status": ""}]
 
-     assert filtrar dias (lista4,300) == [{"availability_365": "310", "reviews_last_year": "0", "status": "pending"}]
-     assert filtrar_dias (lista4,365) == []
-     assert filtrar_dias ([],20) == []
+    assert filtrar_dias (lista4,300) == [{"availability_365": "310", "reviews_last_year": "0", "status": "pending"}]
+    assert filtrar_dias (lista4,200) == [{"availability_365": "276", "reviews_last_year": "2", "status": ""},
+       {"availability_365": "310", "reviews_last_year": "0", "status": "pending"},
+       {"availability_365": "211", "reviews_last_year": "1", "status": ""}]
+    assert filtrar_dias ([],20) == []
 
 
          
