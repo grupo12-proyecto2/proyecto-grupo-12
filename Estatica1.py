@@ -13,9 +13,14 @@ def buscador_barrio (alquiler):
 
        la clave es el nombre del barrio y el valor la cantidad de hospedajes
        ejemplo: 
-       buscador_barrio([{"neighbourhood": "Western Addition"}, {"neighbourhood": "Nob Hill"}])
-       =
-       {"Western Addition": 2, "Nob Hill": 1}
+       buscador_barrio([])={} ejemplo que devuelve vacio .
+       alquiler=[{"neighbourhud":"Bernal Heights"}]
+       buscador_barrio(alquiler)={"Bernal Heights":1}
+       alquiler1=[{"neighbourhud":"Crocker Amazon","price": 100,"room_type":"Entire home/apt"},
+            {"neighbourhud":"Downtown/Civic Center","price":85,"room_type":"Private room"},
+            {"neighbourhud":"Crocker Amazon","price":120,"room_type":"Entire home/apt"}]
+        buscador_barrio(alquiler1)={"Crocker Amazon":2,"Downtown/Civic Center":1} 
+
        '''
        diccionario={}
        for linea in alquiler:
