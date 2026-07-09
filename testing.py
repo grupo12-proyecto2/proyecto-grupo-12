@@ -173,10 +173,12 @@ def test_filtrar_por_habitacion():
     lista=[{"room_type": "Private room","neighbourhood": "Nob hill"},
     {"room_type": "Shared room","neighbourhood": "Nob hill"},
     {"room_type": "Entire home/apt", "neighbourhood": "Nob hill"}]
+    assert filtrar_por_habitacion(lista,["Private room","Shared room","Entire home/apt"]) == lista
     assert filtrar_por_habitacion(lista,["Private room","Shared room"])==[{"room_type": "Private room","neighbourhood": "Nob hill"},
     {"room_type": "Shared room","neighbourhood": "Nob hill"}]
+    assert filtrar_por_habitacion(lista,["Private room"]) == [{"room_type": "Private room","neighbourhood": "Nob hill"}]
     assert filtrar_por_habitacion([],["Private room"])== []
-    assert filtrar_por_habitacion (lista,["room"])== []
+    assert filtrar_por_habitacion (lista,[])== []
 
 #===============================================================
 #               Testing de tipo_habitaciones  
