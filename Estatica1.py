@@ -1,7 +1,7 @@
 #Pregunta 1: Cuales son los 5 barrios con mas alquileres 
 import matplotlib.pyplot as plt
 
-def buscador_barrio (alquiler):
+def buscador_barrio (alquiler,clase):
        '''
        Representamos los alquileres mediante una lista de diccionarios, cada lista
        tiene informacion de un hospedaje. 
@@ -24,12 +24,12 @@ def buscador_barrio (alquiler):
        '''
        diccionario={}
        for linea in alquiler:
-              diccionario[linea["neighbourhood"]]=diccionario.get(linea["neighbourhood"],0)+1
+              diccionario[linea[clase]]=diccionario.get(linea[clase],0)+1
        return diccionario   
 
 
 #version con dos ciclos
-def barrios5 (barrios):
+def barrios5 (barrios,cantidad):
     '''
     Representamos con un diccionario la cantidad de hospedajes por barrios
     barrios: dict
@@ -62,7 +62,7 @@ def barrios5 (barrios):
     copia = barrios.copy()
 
 
-    while len(lista_5) < 5 and  list(copia.keys()) != []:
+    while len(lista_5) < cantidad and  list(copia.keys()) != []:
         maximo = 0
 
         for barrio in copia:
@@ -71,14 +71,14 @@ def barrios5 (barrios):
                 barrio_max = barrio
 
         lista_5[barrio_max] = maximo
-        print 
+        
         
         if copia.get(barrio_max) != None:
             del copia[barrio_max]
     return lista_5
 
     
-def grafico_barras (data):
+def grafico_barras (data,info_x,titulo):
  '''
  Representamos un diccionario con los 5 barrios con más alquileres, y las cantidades de alquileres
  mediante un gráfico de barras.
@@ -93,7 +93,7 @@ def grafico_barras (data):
 
  ax.barh(data.keys(), data.values(), align='center')
  ax.yaxis.set_inverted(True)  
- ax.set_xlabel('Cantidad de alquileres')
- ax.set_title('Los 5 barrios con más alquileres')
+ ax.set_xlabel(info_x)
+ ax.set_title(titulo)
  return fig
 

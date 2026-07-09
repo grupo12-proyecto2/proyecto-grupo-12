@@ -21,9 +21,14 @@ def main ():
          col1, col2 = st.columns(2,gap="large")
 
          #----------PREGUNTA ESTÁTICA: 5 barrios con más alquileres----------
-         barrios=buscador_barrio(lista)
-         barrios_mayores= barrios5(barrios) 
-         grafico= grafico_barras(barrios_mayores)
+         barrios=buscador_barrio(lista,"neighbourhood")
+         barrios_mayores= barrios5(barrios,5) 
+         grafico_alquileres = grafico_barras(barrios_mayores,"Cantidad de alquileres",'Los 5 barrios con más alquileres')
+
+         #----------PREGUNTA ESTÁTICA: 5 barrios con más alquileres----------
+         reseñas = buscador_barrio(lista,"number_of_reviews")
+         reseñas_mayores = barrios5(reseñas,10)
+         grafico_reseñas = grafico_barras(reseñas_mayores,"Cantidad de reseñas","Los 10 alquileres con más reseñas")
          
          #----------PREGUNTA DINÁMICA: Mapeo de alquileres----------
          col1.subheader("Mapa de alquileres por barrio")
@@ -48,7 +53,8 @@ def main ():
          
          #----------Muestra de Gráfico----------
          col1.subheader("ESTADISTICA: Los 5 barrios con mas alquileres")
-         col1.pyplot (grafico)
+         col1.pyplot (grafico_alquileres)
+         col1.pyplot (grafico_reseñas)
 # ==================================================
 # MAIN
 # ==================================================         
