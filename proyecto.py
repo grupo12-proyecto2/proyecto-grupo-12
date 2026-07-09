@@ -12,7 +12,8 @@ from dinamica2_dias import filtrar_dias
 # ==================================================
 def main ():
          # ---------- LECTURA CSV ----------: 
-         lista=lectura() 
+         lista=lectura("Listing-prueba.csv")
+          
 
          #---------- Formato de página ----------
          col1, col2 = st.columns(2,gap="large")

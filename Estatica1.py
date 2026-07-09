@@ -37,12 +37,32 @@ def barrios5 (barrios):
     el parametro representa un diccionario. la clave es el nombre del barrio 
     y el valor la cantidad de hospedajes del barrio.
     La funcion retorna a un diccionario con los 5 barrios con mayor hospedajes.
-    ejemplo: 
+
+    Ejemplo: 
+
+    1)
+    Entrada: {}
+    Salida: {}
+
+    2)
+    Entrada: {"Mission":100,"Wester Addition":50,"Pacific Heights":40,
+             "Dowtown/Civic Center":30,"Bernal Heights":20,"Haight Ashbury":10,
+             "Noe Valley":5})
+
+    Salida:  {"Mission":100,"Wester Addition":50,"Pacific Heights":40,
+             "Dowtown/Civic Center":30,"Bernal Heights":20}
+
+    3)
+    Entrada: {"Mission":100,"Dowtown/Civic Center":30}
+
+    Salida: {"Mission":100,"Dowtown/Civic Center":30}
+
     ''' 
     lista_5 = {}
     copia = barrios.copy()
 
-    while len(lista_5) < 5:
+
+    while len(lista_5) < 5 and  list(copia.keys()) != []:
         maximo = 0
 
         for barrio in copia:
@@ -51,9 +71,10 @@ def barrios5 (barrios):
                 barrio_max = barrio
 
         lista_5[barrio_max] = maximo
+        print 
         
-        del copia[barrio_max]
-
+        if copia.get(barrio_max) != None:
+            del copia[barrio_max]
     return lista_5
 
     

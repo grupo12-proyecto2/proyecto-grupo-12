@@ -1,5 +1,5 @@
 from lectura import crear_diccionario
-from Estatica1 import buscador_barrio
+from Estatica1 import buscador_barrio,barrios5
 from Dinamica1 import filtrar_barrios,buscar_ubicacion
 from dinamica2_dias import filtrar_dias
 
@@ -47,6 +47,14 @@ def test_buscador_barrio():
         "Nob Hill": 1,
         "Haight Ashbury": 1,
         "Bayview":4}
+
+def test_barrios5():
+    assert barrios5({})=={}
+    assert barrios5({"Mission":100,"Wester Addition":50,"Pacific Heights":40,
+                     "Dowtown/Civic Center":30,"Bernal Heights":20,"Haight Ashbury":10,
+                     "Noe Valley":5})=={"Mission":100,"Wester Addition":50,"Pacific Heights":40,
+                                         "Dowtown/Civic Center":30,"Bernal Heights":20}
+    assert barrios5({"Mission":100,"Dowtown/Civic Center":30})=={"Mission":100,"Dowtown/Civic Center":30}
 
 
 #===============================================================
