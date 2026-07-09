@@ -3,6 +3,9 @@ from lectura_csv import lectura
 from Estatica1 import buscador_barrio,barrios5
 from Dinamica1 import filtrar_barrios,buscar_ubicacion
 from dinamica2_dias import filtrar_dias
+from Dinamica3 import filtrar_por_habitacion
+from Dinamica3 import tipo_habitaciones
+
 
 #testing
 '''
@@ -88,12 +91,12 @@ def test_buscar_ubicacion():
 #               Testing de filtrar_dias   
 #===============================================================
 def test_filtrar_dias():
-    lista4= [{"availability_365": "276", "reviews_last_year": "2", "status": ""},
+    lista= [{"availability_365": "276", "reviews_last_year": "2", "status": ""},
     {"availability_365": "310", "reviews_last_year": "0", "status": "pending"},
     {"availability_365": "211", "reviews_last_year": "1", "status": ""}]
 
-    assert filtrar_dias (lista4,300) == [{"availability_365": "310", "reviews_last_year": "0", "status": "pending"}]
-    assert filtrar_dias (lista4,200) == [{"availability_365": "276", "reviews_last_year": "2", "status": ""},
+    assert filtrar_dias (lista,300) == [{"availability_365": "310", "reviews_last_year": "0", "status": "pending"}]
+    assert filtrar_dias (lista,200) == [{"availability_365": "276", "reviews_last_year": "2", "status": ""},
        {"availability_365": "310", "reviews_last_year": "0", "status": "pending"},
        {"availability_365": "211", "reviews_last_year": "1", "status": ""}]
     assert filtrar_dias ([],20) == []
@@ -162,6 +165,29 @@ def test_lectura ():
         "number_of_reviews_ltm": "0",
         "license": ""
         }]
+        
+#===============================================================
+#               Testing de filtrar_por_habitacion   
+#===============================================================
+def test_filtrar_por_habitacion():
+    lista=[{"room_type": "Private room","neighbourhood": "Nob hill"},
+    {"room_type": "Shared room","neighbourhood": "Nob hill"},
+    {"room_type": "Entire home/apt", "neighbourhood": "Nob hill"}]
+    assert filtrar_por_habitacion(lista,["Private room","Shared room"])==[{"room_type": "Private room","neighbourhood": "Nob hill"},
+    {"room_type": "Shared room","neighbourhood": "Nob hill"}]
+    assert filtrar_por_habitacion([],["Private room"])== []
+    assert filtrar_por_habitacion (lista,["room"])== []
+
+#===============================================================
+#               Testing de tipo_habitaciones  
+#===============================================================
+def test_tipo_habitaciones():
+    lista=[{"room_type": "Private room", "neighbourhood": "Nob hill"},
+    {"room_type": "Shared room", "neighbourhood": "Nob hill"},
+    {"room_type": "Shared room", "neighbourhood": "Nob"}] 
+    assert tipo_habitaciones(lista) == ["Private room","Shared room"]
+    assert tipo_habitaciones([]) == []
+    assert tipo_habitaciones ([{ "neighbourhood": "Nob hill"}]) == []
         
 
          

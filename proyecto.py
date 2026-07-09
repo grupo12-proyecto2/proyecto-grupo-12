@@ -6,13 +6,15 @@ from lectura_csv import lectura
 from Estatica1 import buscador_barrio,barrios5,grafico_barras
 from Dinamica1 import filtrar_barrios,buscar_ubicacion
 from dinamica2_dias import filtrar_dias
+from Dinamica3 import filtrar_por_habitacion
+from Dinamica3 import tipo_habitaciones
 
 # ==================================================
 # MAIN
 # ==================================================
 def main ():
          # ---------- LECTURA CSV ----------: 
-         lista=lectura("Listing-prueba.csv")
+         lista=lectura("listings-San Francisco.csv")
           
 
          #---------- Formato de página ----------
@@ -37,6 +39,12 @@ def main ():
          lista_dias=filtrar_dias(lista,dias)
          col2.write(f"Alquileres disponibles con {dias} días disponibles")
          col2.dataframe(lista_dias)
+         #---------PREGUNTA DINAMICA: Tabla de alquileres con x tipo de habitacion--------
+         obtener_habitaciones = tipo_habitaciones(lista)
+         habitaciones = col2.multiselect("Seleccione uno o más tipos de habitación",obtener_habitaciones)
+         lista_habitaciones = filtrar_por_habitacion(lista, habitaciones)
+         col2.dataframe(lista_habitaciones)
+
          
          #----------Muestra de Gráfico----------
          col1.subheader("ESTADISTICA: Los 5 barrios con mas alquileres")
