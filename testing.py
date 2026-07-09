@@ -1,4 +1,5 @@
 from lectura import crear_diccionario
+from lectura_csv import lectura
 from Estatica1 import buscador_barrio,barrios5
 from Dinamica1 import filtrar_barrios,buscar_ubicacion
 from dinamica2_dias import filtrar_dias
@@ -25,12 +26,12 @@ def test_crear_diccionario():
 #========================================================
 def test_buscador_barrio():
     #funcion de prueba de la funcion busacador_barrio
-     assert buscador_barrio([])=={} 
-     assert buscador_barrio([{"neighbourhood":"Bernal Heights"}])=={"Bernal Heights":1 }
-     assert buscador_barrio([{"neighbourhood":"Crocker Amazon","price": 100,"room_type":"Entire home/apt"},
+    assert buscador_barrio([])=={} 
+    assert buscador_barrio([{"neighbourhood":"Bernal Heights"}])=={"Bernal Heights":1 }
+    assert buscador_barrio([{"neighbourhood":"Crocker Amazon","price": 100,"room_type":"Entire home/apt"},
             {"neighbourhood":"Downtown/Civic Center","price":85,"room_type":"Private room"},
             {"neighbourhood":"Crocker Amazon","price":120,"room_type":"Entire home/apt"}])=={"Crocker Amazon":2,"Downtown/Civic Center":1} 
-     alquileres = [
+    alquileres = [
         {"neighbourhood": "Western Addition"},
         {"neighbourhood": "Bernal Heights"},
         {"neighbourhood": "Haight Ashbury"},
@@ -41,7 +42,7 @@ def test_buscador_barrio():
         {"neighbourhood": "Bayview"},
         {"neighbourhood": "Bayview"},
      ]
-     assert buscador_barrio(alquileres) == {
+    assert buscador_barrio(alquileres) == {
         "Western Addition":2,
         "Bernal Heights":1,
         "Nob Hill": 1,
@@ -97,5 +98,70 @@ def test_filtrar_dias():
        {"availability_365": "211", "reviews_last_year": "1", "status": ""}]
     assert filtrar_dias ([],20) == []
 
+def test_lectura ():
+    assert lectura("Listing-prueba.csv") == [{
+        "id": "958",
+        "name": "Bright Modern Garden Unit - 1BR/1BTH",
+        "host_id": "1169",
+        "host_profile_id": "1462506189282101689",
+        "host_name": "Holly",
+        "neighbourhood_group": "",
+        "neighbourhood": "Western Addition",
+        "latitude": "37.77028",
+        "longitude": "-122.43317",
+        "room_type": "Entire home/apt",
+        "price": "",
+        "minimum_nights": "2",
+        "number_of_reviews": "507",
+        "last_review": "2025-11-15",
+        "reviews_per_month": "2.54",
+        "calculated_host_listings_count": "1",
+        "availability_365": "228",
+        "number_of_reviews_ltm": "41",
+        "license": "STR-0006854"
+        },
+        {
+        "id": "5858",
+        "name": "Creative Sanctuary",
+        "host_id": "8904",
+        "host_profile_id": "1462506623299518225",
+        "host_name": "Philip Jonathon",
+        "neighbourhood_group": "",
+        "neighbourhood": "Bernal Heights",
+        "latitude": "37.74474",
+        "longitude": "-122.42089",
+        "room_type": "Entire home/apt",
+        "price": "",
+        "minimum_nights": "30",
+        "number_of_reviews": "105",
+        "last_review": "2017-08-06",
+        "reviews_per_month": "0.52",
+        "calculated_host_listings_count": "1",
+        "availability_365": "365",
+        "number_of_reviews_ltm": "0",
+        "license": ""
+        },
+        {
+        "id": "8142",
+        "name": "*FriendlyRoom Apt. Style -UCSF/USF - San Francisco",
+        "host_id": "21994",
+        "host_profile_id": "1462506956810615042",
+        "host_name": "Aaron",
+        "neighbourhood_group": "",
+        "neighbourhood": "Haight Ashbury",
+        "latitude": "37.76555",
+        "longitude": "-122.45213",
+        "room_type": "Private room",
+        "price": "",
+        "minimum_nights": "32",
+        "number_of_reviews": "10",
+        "last_review": "2023-07-30",
+        "reviews_per_month": "0.07",
+        "calculated_host_listings_count": "20",
+        "availability_365": "362",
+        "number_of_reviews_ltm": "0",
+        "license": ""
+        }]
+        
 
          
