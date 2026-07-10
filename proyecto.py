@@ -20,7 +20,9 @@ def main ():
           
 
          #---------- Formato de página ----------
+         st.set_page_config(layout="wide")
          col1, col2 = st.columns(2,gap="large")
+
 
          #----------PREGUNTA ESTÁTICA: 5 barrios con más alquileres----------
          barrios=buscador_barrio(lista,"neighbourhood")
@@ -45,18 +47,20 @@ def main ():
 
          #----------PREGUNTA DINÁMICA: Tabla de alquileres con X disponibilidad de días---------- 
          rango_dias= list(range(1,366))
-         col2.subheader("Disponibilidad de alquileres según días disponibles")    
+         col2.subheader("Filtro de alquileres")    
          dias = col2.select_slider("Cantidad de días",rango_dias) 
          lista_dias=filtrar_dias(lista,dias)
-         col2.write(f"Alquileres disponibles con {dias} días disponibles")
-         col2.dataframe(lista_dias)
+         
+         
          #---------PREGUNTA DINAMICA: Tabla de alquileres con x tipo de habitacion--------
          obtener_habitaciones = tipo_habitaciones(lista)
          habitaciones = col2.multiselect("Seleccione uno o más tipos de habitación",obtener_habitaciones)
-         lista_habitaciones = filtrar_por_habitacion(lista, habitaciones)
+         lista_habitaciones = filtrar_por_habitacion(lista_dias, habitaciones)
+
+         #----------Muestra de tabla-------------  
+         col2.write("Alquileres disponibles con  los días y el tipo de habitación seleccionados") 
          col2.dataframe(lista_habitaciones)
 
-         
          #----------Muestra de Mapa-------------
          ubicacion= buscar_ubicacion(alquileres_ultimo_año)
          col1.map(ubicacion,size=20, color="#0044ff")
@@ -64,7 +68,7 @@ def main ():
          #----------Muestra de Gráfico----------
          col1.subheader("ESTADISTICAS")
          col1.pyplot (grafico_alquileres)
-         col1.pyplot (grafico_reseñas)
+         col2.pyplot (grafico_reseñas)
 
 # ==================================================
 # MAIN
