@@ -1,6 +1,15 @@
 #PREGUNTA DINAMICA: Fue reseñada en el último año?
 def filtro_ultimo_año (alquileres:list[dict],fue_reseñada:bool):
     '''
+    Representamos una lista de alquileres usando una lista de diccionarios.
+    
+    filtro_ultimo_año: list[dict] bool -> list[dict]
+    alquileres representa la lista de alquileres a filtrar
+    fue_reseñada representa el estado de un Selectbox
+    Si es "True" se ejecuta el filtro
+    (Se eliminan los alquileres sin reseñas en 2025)
+    Si es "False" se mantiene la lista
+
     Ejemplos:
     1)
     Entrada:

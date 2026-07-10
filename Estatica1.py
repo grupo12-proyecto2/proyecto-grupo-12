@@ -79,21 +79,21 @@ def buscar_maximos (diccionario_base,cantidad_maximos):
 
     
 def grafico_barras (data,info_x,titulo):
- '''
- Representamos un diccionario con los 5 barrios con más alquileres, y las cantidades de alquileres
- mediante un gráfico de barras.
- data: Diccionario
+    '''
+    Representamos un diccionario con los 5 barrios con más alquileres, y las cantidades de alquileres
+    mediante un gráfico de barras.
+    data: Diccionario
 
- grafico_barras: Diccionario -> Gráfico de barras
- El parámetro es un diccionario con barrios, y la cantidad de alquileres en cada uno.
- Devuelve un gráfico de barras, donde en X se muestran los barrios y en Y n de alquileres.
+    grafico_barras: Diccionario -> Gráfico de barras
+    El parámetro es un diccionario con barrios, y la cantidad de alquileres en cada uno.
+    Devuelve un gráfico de barras, donde en X se muestran los barrios y en Y n de alquileres.
 
- '''      
- fig, ax = plt.subplots()
+    '''         
+    fig, ax = plt.subplots()
 
- ax.barh(data.keys(), data.values(), align='center')
- ax.yaxis.set_inverted(True)  
- ax.set_xlabel(info_x)
- ax.set_title(titulo)
- return fig
+    ax.barh(data.keys(), data.values(), align='center')
+    ax.yaxis.set_inverted(True)  
+    ax.set_xlabel(info_x)
+    ax.set_title(titulo)
+    return fig
 

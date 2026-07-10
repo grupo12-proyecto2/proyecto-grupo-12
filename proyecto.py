@@ -54,7 +54,7 @@ def main ():
          
          #---------PREGUNTA DINAMICA: Tabla de alquileres con x tipo de habitacion--------
          obtener_habitaciones = tipo_habitaciones(lista)
-         habitaciones = col2.multiselect("Seleccione uno o más tipos de habitación",obtener_habitaciones)
+         habitaciones = col2.multiselect("Seleccione uno o más tipos de habitación",obtener_habitaciones,default=obtener_habitaciones)
          lista_habitaciones = filtrar_por_habitacion(lista_dias, habitaciones)
 
          #----------Muestra de tabla-------------  
