@@ -1,10 +1,12 @@
 from lectura import crear_diccionario
 from lectura_csv import lectura
-from Estatica1 import buscador_barrio,barrios5
+from Estatica1 import buscador_barrio,buscar_maximos
+from Estatica2 import buscador_reseñas
 from Dinamica1 import filtrar_barrios,buscar_ubicacion
 from dinamica2_dias import filtrar_dias
 from Dinamica3 import filtrar_por_habitacion
 from Dinamica3 import tipo_habitaciones
+from Dinamica4 import filtro_ultimo_año
 
 
 #testing
@@ -29,11 +31,11 @@ def test_crear_diccionario():
 #========================================================
 def test_buscador_barrio():
     #funcion de prueba de la funcion busacador_barrio
-    assert buscador_barrio([])=={} 
-    assert buscador_barrio([{"neighbourhood":"Bernal Heights"}])=={"Bernal Heights":1 }
+    assert buscador_barrio([],"neighbourhood")=={} 
+    assert buscador_barrio([{"neighbourhood":"Bernal Heights"}],"neighbourhood")=={"Bernal Heights":1 }
     assert buscador_barrio([{"neighbourhood":"Crocker Amazon","price": 100,"room_type":"Entire home/apt"},
             {"neighbourhood":"Downtown/Civic Center","price":85,"room_type":"Private room"},
-            {"neighbourhood":"Crocker Amazon","price":120,"room_type":"Entire home/apt"}])=={"Crocker Amazon":2,"Downtown/Civic Center":1} 
+            {"neighbourhood":"Crocker Amazon","price":120,"room_type":"Entire home/apt"}],"neighbourhood")=={"Crocker Amazon":2,"Downtown/Civic Center":1} 
     alquileres = [
         {"neighbourhood": "Western Addition"},
         {"neighbourhood": "Bernal Heights"},
@@ -45,20 +47,20 @@ def test_buscador_barrio():
         {"neighbourhood": "Bayview"},
         {"neighbourhood": "Bayview"},
      ]
-    assert buscador_barrio(alquileres) == {
+    assert buscador_barrio(alquileres,"neighbourhood") == {
         "Western Addition":2,
         "Bernal Heights":1,
         "Nob Hill": 1,
         "Haight Ashbury": 1,
         "Bayview":4}
 
-def test_barrios5():
-    assert barrios5({})=={}
-    assert barrios5({"Mission":100,"Wester Addition":50,"Pacific Heights":40,
+def test_buscar_maximos():
+    assert buscar_maximos({},10)=={}
+    assert buscar_maximos({"Mission":100,"Wester Addition":50,"Pacific Heights":40,
                      "Dowtown/Civic Center":30,"Bernal Heights":20,"Haight Ashbury":10,
-                     "Noe Valley":5})=={"Mission":100,"Wester Addition":50,"Pacific Heights":40,
+                     "Noe Valley":5},5)=={"Mission":100,"Wester Addition":50,"Pacific Heights":40,
                                          "Dowtown/Civic Center":30,"Bernal Heights":20}
-    assert barrios5({"Mission":100,"Dowtown/Civic Center":30})=={"Mission":100,"Dowtown/Civic Center":30}
+    assert buscar_maximos({"Mission":100,"Dowtown/Civic Center":30},5)=={"Mission":100,"Dowtown/Civic Center":30}
 
 
 #===============================================================
@@ -191,5 +193,40 @@ def test_tipo_habitaciones():
     assert tipo_habitaciones([]) == []
     assert tipo_habitaciones ([{ "neighbourhood": "Nob hill"}]) == []
         
+#===============================================================
+#               Testing de filtro_ultimo_año 
+#===============================================================
+def test_filtro_ultimo_año():
+    assert filtro_ultimo_año([
+    {"name": "Bright Modern Garden Unit - 1BR/1BTH", "number_of_reviews": 507, "last_review": "2025-11-15", "reviews_per_month": 2.54},
+    {"name": "Creative Sanctuary", "number_of_reviews": 105, "last_review": "2017-08-06", "reviews_per_month": 0.52},
+    {"name": "*FriendlyRoom Apt. Style -UCSF/USF - San Francisco", "number_of_reviews": 10, "last_review": "2023-07-30", "reviews_per_month": 0.07}
+    ],True) == [
+    {"name": "Bright Modern Garden Unit - 1BR/1BTH", "number_of_reviews": 507, "last_review": "2025-11-15", "reviews_per_month": 2.54},
+    ]
+    assert filtro_ultimo_año ([
+    {"name": "Creative Sanctuary", "number_of_reviews": 105, "last_review": "2017-08-06", "reviews_per_month": 0.52},
+    {"name": "*FriendlyRoom Apt. Style -UCSF/USF - San Francisco", "number_of_reviews": 10, "last_review": "2023-07-30", "reviews_per_month": 0.07}
+    ],False) == [
+    {"name": "Creative Sanctuary", "number_of_reviews": 105, "last_review": "2017-08-06", "reviews_per_month": 0.52},
+    {"name": "*FriendlyRoom Apt. Style -UCSF/USF - San Francisco", "number_of_reviews": 10, "last_review": "2023-07-30", "reviews_per_month": 0.07}
+    ]
+    assert filtro_ultimo_año ([
+    {"name": "Creative Sanctuary", "number_of_reviews": 105, "last_review": "2017-08-06", "reviews_per_month": 0.52},
+    {"name": "*FriendlyRoom Apt. Style -UCSF/USF - San Francisco", "number_of_reviews": 10, "last_review": "2023-07-30", "reviews_per_month": 0.07}
+    ],True) == []
+    assert filtro_ultimo_año([],True) == []
 
+def test_buscador_reseñas ():
+    assert buscador_reseñas([
+    {"name": "Bright Modern Garden Unit - 1BR/1BTH", "number_of_reviews": "507", "last_review": "2025-11-15", "reviews_per_month": 2.54},
+    {"name": "Creative Sanctuary", "number_of_reviews": "105", "last_review": "2017-08-06", "reviews_per_month": 0.52},
+    {"name": "*FriendlyRoom Apt. Style -UCSF/USF - San Francisco", "number_of_reviews": "10", "last_review": "2023-07-30", "reviews_per_month": 0.07}
+    ]) == {"Bright Modern Garden Unit - 1BR/1BTH":507,"Creative Sanctuary":105,"*FriendlyRoom Apt. Style -UCSF/USF - San Francisco":10}
+    assert buscador_reseñas([
+    {"name": "Bright Modern Garden Unit - 1BR/1BTH", "last_review": "2025-11-15", "reviews_per_month": 2.54},
+    {"name": "Creative Sanctuary", "last_review": "2017-08-06", "reviews_per_month": 0.52},
+    {"name": "*FriendlyRoom Apt. Style -UCSF/USF - San Francisco", "last_review": "2023-07-30", "reviews_per_month": 0.07}
+    ]) ==  {"Bright Modern Garden Unit - 1BR/1BTH":0,"Creative Sanctuary":0,"*FriendlyRoom Apt. Style -UCSF/USF - San Francisco":0}
+    assert buscador_reseñas ([]) == {}  
          
